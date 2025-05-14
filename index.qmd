@@ -1,0 +1,31 @@
+---
+title: "ROC Humvar"
+format: html
+editor: visual
+---
+
+```{r setup, include=FALSE}
+library(tidymodels)
+library(readr)
+library(ggplot2)
+library(caret)
+library(randomForest)
+
+```
+
+## Load in humvar dataset
+
+```{r loadData}
+df <- read.csv("/Users/faisalUser/ML-HDS2025/ML/data/humvar.csv")
+df$labels <- as.factor(df$labels)
+dim(df)
+```
+
+```{r train}
+dfTrain <- df[sample(1000),]
+dfTest <- df[sample(1000), ]
+head(dfTrain)
+
+rf <- randomForest(labels ~., dfTrain)
+rf
+```
